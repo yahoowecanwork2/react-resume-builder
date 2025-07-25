@@ -24,7 +24,7 @@ function App() {
   function nextstep() {
     setStep(prev => prev + 1);
   }
-  function nextstep() {
+  function prevstep() {
     setStep(prev => prev - 1);
   }
 
@@ -56,6 +56,23 @@ function App() {
       <h1 className="text-3xl font-bold text-center mb-6 ">
         Resume Builder
       </h1>
+      <div className="max-w-xl mx-auto bg-white p-6 rouded shadow">
+        {renderStepForm()}
+        <div className="flex justify-between mt-6">
+
+          <button
+            onClick={prevstep}
+            disabled={step === 1}
+            className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50">previous</button>
+          <p>step {step}of 6</p>
+          <button onClick={nextstep}
+            disabled={step === 1}
+            className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50">next</button>
+        </div>
+        <div className="mt-4 bg-gray-100 p-4 text-sm rounded">
+          <p><strong>Name:{resumeData.name}</strong></p>
+        </div>
+      </div>
     </div>
   )
 }
