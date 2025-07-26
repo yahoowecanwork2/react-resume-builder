@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PersonalForm from "./component/PersonalForm";
 import AboutForm from "./component/AboutForm";
 import SkillsForm from "./component/Skillsform";
 import ExperianceForm from "./component/ExperienceForm";
@@ -41,7 +42,7 @@ function App() {
   function renderStepForm() {
     switch (step) {
       case 1:
-        return <div>Personal Info Form</div>;
+        return <div><PersonalForm data={resumeData} updateField={updateField} /></div>;
       case 2:
         return <div><AboutForm data={resumeData} updateField={updateField} /></div>;
       case 3:
