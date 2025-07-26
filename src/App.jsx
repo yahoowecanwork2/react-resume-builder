@@ -3,6 +3,7 @@ import AboutForm from "./component/AboutForm";
 import SkillsForm from "./component/Skillsform";
 import ExperianceForm from "./component/ExperienceForm";
 import EducationForm from "./component/EducationForm";
+import ProjectsForm from "./component/ProjectsForm";
 
 function App() {
   const [step, setStep] = useState(1);
@@ -50,7 +51,7 @@ function App() {
       case 5:
         return <div><EducationForm data={resumeData} updateField={updateField} /></div>;
       case 6:
-        return <div>Projects Form</div>;
+        return <div><ProjectsForm data={resumeData} updateField={updateField} /></div>;
       default:
         return null;
     }
