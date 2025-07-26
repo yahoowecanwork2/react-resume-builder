@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AboutForm from "./component/AboutForm";
 import SkillsForm from "./component/Skillsform";
+import ExperianceForm from "./component/ExperienceForm";
 
 function App() {
   const [step, setStep] = useState(1);
@@ -44,7 +45,7 @@ function App() {
       case 3:
         return <div><SkillsForm data={resumeData} updateField={updateField} /></div>;
       case 4:
-        return <div>Experience Form</div>;
+        return <div><ExperianceForm data={resumeData} updateField={updateField} /></div>;
       case 5:
         return <div>Education Form</div>;
       case 6:
