@@ -117,12 +117,19 @@ function App() {
           </p>
 
           <h3 className="mt-4 font-semibold">Experience</h3>
-          <ul className="list-disc ml-5 text-gray-600">
-            {Array.isArray(resumeData.experience) &&
-              resumeData.experience.map((exp, i) =>
-                exp.trim() && <li key={i}>{exp}</li>
-              )}
-          </ul>
+          {resumeData.experience.length === 0 ? (
+            <p className="text-gray-600">Fresher</p>
+          ) : (
+            <ul className="list-disc ml-5 text-gray-600">
+              {resumeData.experience.map((exp, i) => (
+                <li key={i}>
+                  <strong>{exp.company}</strong> - {exp.role} ({exp.duration})
+                  <div className="text-sm">{exp.description}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+
 
           <h3 className="mt-4 font-semibold">Education</h3>
           <ul className="list-disc ml-5 text-gray-600">
