@@ -131,73 +131,83 @@ function App() {
         </div>
 
         {/* Right side - Live Preview */}
-        <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-bold mb-4">Live Preview</h2>
+        <div className="bg-white p-6 rounded shadow" ref={previewRef}>
+          <div className="bg-white p-6 rounded shadow">
+            {/* <h2 className="text-xl font-bold mb-4">Live Preview</h2> */}
 
-          <h1 className="text-2xl font-bold">{resumeData.name}</h1>
-          <p className="text-gray-700">
-            {resumeData.email} | {resumeData.phone}
-          </p>
+            <h1 className="text-2xl font-bold">{resumeData.name}</h1>
+            <p className="text-gray-700">
+              {resumeData.email} | {resumeData.phone}
+            </p>
 
-          <h3 className="mt-4 font-semibold">About</h3>
-          <p className="text-gray-600">{resumeData.about}</p>
+            <h3 className="mt-4 font-semibold">About</h3>
+            <p className="text-gray-600">{resumeData.about}</p>
 
-          <h3 className="mt-4 font-semibold">Skills</h3>
-          <p className="text-gray-600">
-            {Array.isArray(resumeData.skills)
-              ? resumeData.skills.filter(skill => skill.trim()).join(", ")
-              : ""}
-          </p>
+            <h3 className="mt-4 font-semibold">Skills</h3>
+            <p className="text-gray-600">
+              {Array.isArray(resumeData.skills)
+                ? resumeData.skills.filter(skill => skill.trim()).join(", ")
+                : ""}
+            </p>
 
-          <h3 className="mt-4 font-semibold">Experience</h3>
-          {resumeData.experience.length === 0 ? (
-            <p className="text-gray-600">Fresher</p>
-          ) : (
+            <h3 className="mt-4 font-semibold">Experience</h3>
+            {resumeData.experience.length === 0 ? (
+              <p className="text-gray-600">Fresher</p>
+            ) : (
+              <ul className="list-disc ml-5 text-gray-600">
+                {resumeData.experience.map((exp, i) => (
+                  <li key={i}>
+                    <strong>{exp.company}</strong> - {exp.role} ({exp.duration})
+                    <div className="text-sm">{exp.description}</div>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+
+            <h3 className="mt-4 font-semibold">Education</h3>
             <ul className="list-disc ml-5 text-gray-600">
-              {resumeData.experience.map((exp, i) => (
-                <li key={i}>
-                  <strong>{exp.company}</strong> - {exp.role} ({exp.duration})
-                  <div className="text-sm">{exp.description}</div>
-                </li>
-              ))}
+              {Array.isArray(resumeData.education) &&
+                resumeData.education.map((edu, i) => (
+                  <li key={i}>
+                    <strong>{edu.college}</strong> - {edu.course} ({edu.marks})
+                  </li>
+                ))}
             </ul>
-          )}
 
-
-          <h3 className="mt-4 font-semibold">Education</h3>
-          <ul className="list-disc ml-5 text-gray-600">
-            {Array.isArray(resumeData.education) &&
-              resumeData.education.map((edu, i) => (
-                <li key={i}>
-                  <strong>{edu.college}</strong> - {edu.course} ({edu.marks})
-                </li>
-              ))}
-          </ul>
-
-          <h3 className="mt-4 font-semibold">Projects</h3>
-          <ul className="list-disc ml-5 text-gray-600">
-            {Array.isArray(resumeData.projects) &&
-              resumeData.projects.map((proj, i) => (
-                <li key={i}>
-                  <strong>{proj.title}</strong> – {proj.description}
-                  {proj.link && (
-                    <a
-                      href={proj.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 ml-2"
-                    >
-                      [Link]
-                    </a>
-                  )}
-                </li>
-              ))}
-          </ul>
+            <h3 className="mt-4 font-semibold">Projects</h3>
+            <ul className="list-disc ml-5 text-gray-600">
+              {Array.isArray(resumeData.projects) &&
+                resumeData.projects.map((proj, i) => (
+                  <li key={i}>
+                    <strong>{proj.title}</strong> – {proj.description}
+                    {proj.link && (
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 ml-2"
+                      >
+                        [Link]
+                      </a>
+                    )}
+                  </li>
+                ))}
+            </ul>
 
 
 
+
+          </div>
 
         </div>
+        <button
+          onClick={downloadPDF}
+          className="bg-purple-600 text-white px-4 py-2 rounded mt-4"
+        >
+          Download as PDF
+        </button>
+
       </div>
     </div>
   );
