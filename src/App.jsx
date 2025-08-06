@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import PersonalForm from "./component/PersonalForm";
 import AboutForm from "./component/AboutForm";
 import SkillsForm from "./component/Skillsform";
@@ -63,6 +65,30 @@ function App() {
         return null;
     }
   }
+  const previewRef = useRef();
+  const downloadPDF = () => {
+    const input = previewRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const pageheight = 297;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageheight;
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageheight;
+      }
+
+      pdf.save("resume.pdf");
+
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
